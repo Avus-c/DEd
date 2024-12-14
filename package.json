@@ -1,0 +1,149 @@
+{
+	"name": "ded",
+	"displayName": "ded",
+	"description": "A keyboard driven directory editor.",
+	"version": "0.1.0",
+	"publisher": "Avus",
+	"license": "MIT",
+	"repository": {
+		"url": "https://gitlab.com/avus-c/dired-vscode"
+	},
+	"engines": {
+		"vscode": "^1.86.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"keywords": [
+		"ded",
+		"filer",
+		"dired"
+	],
+	"main": "./out/src/extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.ded.open",
+				"title": "Open ded"
+			}
+		],
+		"keybindings": [
+			{
+				"key": ".",
+				"command": "extension.ded.showHiddenFiles",
+				"when": "ded.open && editorTextFocus"
+			},
+			{
+				"key": "enter",
+				"command": "extension.ded.enter",
+				"when": "ded.open && editorTextFocus"
+			},
+			{
+				"key": "d",
+				"command": "extension.ded.createDir",
+				"when": "ded.open && editorTextFocus"
+			},
+			{
+				"key": "f",
+				"command": "extension.ded.createFile",
+				"when": "ded.open && editorTextFocus"
+			},
+			{
+				"key": "r",
+				"command": "extension.ded.move",
+				"when": "ded.open && editorTextFocus"
+			},
+			{
+				"key": "delete",
+				"command": "extension.ded.delete",
+				"when": "ded.open && editorTextFocus"
+			},
+			{
+				"key": "c",
+				"command": "extension.ded.copy",
+				"when": "ded.open && editorTextFocus"
+			},
+			{
+				"key": "backspace",
+				"command": "extension.ded.goUpDir",
+				"when": "ded.open && editorTextFocus"
+			},
+			{
+				"key": "space",
+				"command": "extension.ded.toggleSelect",
+				"when": "ded.open && editorTextFocus"
+			},
+			{
+				"key": "g",
+				"command": "extension.ded.refresh",
+				"when": "ded.open && editorTextFocus"
+			},
+			{
+				"key": "q",
+				"command": "extension.ded.close",
+				"when": "ded.open && editorTextFocus"
+			},
+			{
+				"key": "p",
+				"command": "extension.ded.paste",
+				"when": "ded.open && editorTextFocus"
+			},
+			{
+				"key": "ctrl h",
+				"command": "extension.ded.home",
+				"when": "ded.open && editorTextFocus"
+			},
+			{
+				"key": "s n",
+				"command": "extension.ded.sort.name",
+				"when": "ded.open && editorTextFocus"
+			},
+			{
+				"key": "s s",
+				"command": "extension.ded.sort.size",
+				"when": "ded.open && editorTextFocus"
+			},
+			{
+				"key": "s d",
+				"command": "extension.ded.sort.date",
+				"when": "ded.open && editorTextFocus"
+			},
+			{
+				"key": "s e",
+				"command": "extension.ded.sort.fileExtension",
+				"when": "ded.open && editorTextFocus"
+			}
+		],
+		"languages": [
+			{
+				"id": "ded",
+				"extensions": [
+					".ded"
+				]
+			}
+		],
+		"grammars": [
+			{
+				"language": "ded",
+				"scopeName": "source.ded",
+				"path": "./ded.tmLanguage.json"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint src",
+		"package": "vsce package"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.17.0",
+		"@types/node": "latest",
+		"@types/vscode": "^1.86.0",
+		"@vscode/vsce": "latest",
+		"globals": "^15.13.0",
+		"typescript": "latest",
+		"typescript-eslint": "^8.18.0"
+	},
+	"preview": true
+}

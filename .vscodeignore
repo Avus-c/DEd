@@ -1,0 +1,7 @@
+#ignore everything and make exception for the things we need
+**
+
+# Keep
+!LICENSE
+!out/src/*.js
+!ded.tmLanguage.json

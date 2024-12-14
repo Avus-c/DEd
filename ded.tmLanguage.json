@@ -1,0 +1,65 @@
+{
+	"name": "ded",
+	"scopeName": "source.ded",
+	"patterns": [
+		{
+			"include": "#filenode"
+		},
+		{
+			"include": "#dirnode"
+		},
+		{
+			"include": "#symlinknode"
+		},
+		{
+			"include": "#selectednode"
+		}
+	],
+	"repository": {
+		"filenode": {
+			"name": "node.file.ded",
+			"match": "^ +(.{40}) .+:[0-9]{2} +-a[rh-]+(.+)?",
+			"captures": {
+				"1": {
+					"name": "constant.numeric.file.ded"
+				},
+				"2": {
+					"name": "constant.numeric.file.ded"
+				}
+			}
+		},
+		"dirnode": {
+			"name": "node.directory.ded",
+			"match": "^ +(.{40}) .+:[0-9]{2} +d[rh-]+(.+)?",
+			"captures": {
+				"1": {
+					"name": "keyword.control.directory.ded"
+				},
+				"2": {
+					"name": "keyword.control.directory.ded"
+				}
+			}
+		},
+		"symlinknode": {
+			"name": "node.symlink.ded",
+			"match": "^ +(.{40}) .+:[0-9]{2} +l[arh-]+ +(->.+)",
+			"captures": {
+				"1": {
+					"name": "support.class.symlink.ded"
+				},
+				"2": {
+					"name": "support.class.symlink.ded"
+				}
+			}
+		},
+		"selectednode": {
+			"name": "node.selected.ded",
+			"match": "^\\* +(.{40})",
+			"captures": {
+				"0": {
+					"name": "string.quoted.selected.ded"
+				}
+			}
+		}
+	}
+}
