@@ -36,6 +36,7 @@ export default class DEd implements vscode.TextDocumentContentProvider {
 	private m_nodesDirs: Node[];
 	private m_nodesFiles: Node[];
 	private m_nodesLinks: Node[];
+	private m_cursorPos: number = 0;
 	private m_sortMode: SortMode = SortMode.Name;
 	private m_path: string; // toplevel path of currently displayed directory
 	private m_headerSize: number = 4; // does not include the first separator
@@ -61,6 +62,10 @@ export default class DEd implements vscode.TextDocumentContentProvider {
 		return this.m_path;
 	}
 
+	cursorPos(): number {
+		return this.m_cursorPos;
+	}
+
 	toggleHiddenFiles() {
 		this.m_showHiddenNodes = !this.m_showHiddenNodes;
 		this.reRender();
@@ -73,9 +78,17 @@ export default class DEd implements vscode.TextDocumentContentProvider {
 		this.openNode(node.path(true), node.isDir(true));
 	}
 
-	reload() {
-		this.readNodes(this.m_path);
+	reload(path: string = this.m_path) {
+		// is also called on startup, where no valid editor exists
+		const editor = vscode.window.activeTextEditor;
+		this.m_cursorPos = !editor ? 0 : editor.selection.active.line;
+
+		this.readNodes(path);
 		this.reRender();
+
+		if (this.m_buffer.length < this.m_cursorPos) {
+			this.m_cursorPos = this.m_buffer.length - 1
+		}
 	}
 
 	async createDir() {
@@ -269,8 +282,7 @@ export default class DEd implements vscode.TextDocumentContentProvider {
 		};
 
 		if (asView) {
-			this.readNodes(path);
-			this.reRender();
+			this.reload(path)
 		}
 
 		const uri = getUri(asView, path);

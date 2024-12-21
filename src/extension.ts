@@ -214,6 +214,9 @@ export function activate(context: vscode.ExtensionContext): ExtensionInternal {
 				cursorStyle: vscode.TextEditorCursorStyle.Block,
 			};
 			vscode.commands.executeCommand('setContext', 'ded.open', true);
+			const newPosition = new vscode.Position(ded.cursorPos(), 0);
+			const newSelection = new vscode.Selection(newPosition, newPosition);
+			editor.selection = newSelection;
 		} else {
 			vscode.commands.executeCommand('setContext', 'ded.open', false);
 		}
