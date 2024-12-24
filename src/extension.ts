@@ -209,16 +209,19 @@ export function activate(context: vscode.ExtensionContext): ExtensionInternal {
 	);
 
 	vscode.window.onDidChangeActiveTextEditor((editor) => {
-		if (editor && editor.document.uri.scheme === DEd.scheme) {
-			editor.options = {
+		// ? for some reason this function is called twice, first with editor === undefined
+		// ? then with whatever editor is open.
+		const ded_buffer: boolean = editor !== undefined && editor.document.uri.scheme === DEd.scheme;
+		// controls the ded.open check used in package.json to enable keybindings
+		vscode.commands.executeCommand('setContext', 'ded.open', ded_buffer);
+
+		if (ded_buffer) {
+			editor!.options = {
 				cursorStyle: vscode.TextEditorCursorStyle.Block,
 			};
-			vscode.commands.executeCommand('setContext', 'ded.open', true);
 			const newPosition = new vscode.Position(ded.cursorPos(), 0);
 			const newSelection = new vscode.Selection(newPosition, newPosition);
-			editor.selection = newSelection;
-		} else {
-			vscode.commands.executeCommand('setContext', 'ded.open', false);
+			editor!.selection = newSelection;
 		}
 	});
 

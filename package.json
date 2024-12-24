@@ -6,7 +6,7 @@
 	"publisher": "Avus",
 	"license": "MIT",
 	"repository": {
-		"url": "https://gitlab.com/avus-c/dired-vscode"
+		"url": "https://github.com/Avus-c/DEd"
 	},
 	"engines": {
 		"vscode": "^1.86.0"
@@ -133,7 +133,6 @@
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
-		"lint": "eslint src",
 		"package": "vsce package"
 	},
 	"devDependencies": {
